@@ -22,10 +22,23 @@ console.log("Bot is running...");
 
 // start command
 bot.onText(/\/start/, (msg) => {
+
   bot.sendMessage(
     msg.chat.id,
-    "🤖 Welcome to Plus Shop!\n\n📸 Send payment screenshot."
+    `🎮 Welcome to PLUS SHOP 🎮
+
+💎 Fast & Trusted Top Up Service`,
+    {
+      reply_markup: {
+        keyboard: [
+          ["🔫PUBG UC", "💎 MLBB Diamonds"],
+          ["🔫Free Fire", "😎 Contact Admin"]
+        ],
+        resize_keyboard: true
+      }
+    }
   );
+
 });
 
 // photo receive
@@ -126,6 +139,63 @@ bot.on("callback_query", (query) => {
     bot.sendMessage(
       chatId,
       "❌ Payment Rejected!\n\nPlease contact admin."
+    );
+
+  }
+
+});
+bot.on("message", (msg) => {
+
+  const text = msg.text;
+
+  // PUBG
+  if (text === "🔫 PUBG UC") {
+
+    bot.sendMessage(
+      msg.chat.id,
+      `🔫 PUBG UC PRICE LIST
+
+60 UC  - 1,000 Ks
+325 UC - 5,000 Ks
+660 UC - 10,000 Ks`
+    );
+
+  }
+
+  // MLBB
+  if (text === "💎 MLBB Diamonds") {
+
+    bot.sendMessage(
+      msg.chat.id,
+      `💎 MLBB PRICE LIST
+
+86 Diamonds  - 2,000 Ks
+172 Diamonds - 4,000 Ks
+257 Diamonds - 6,000 Ks`
+    );
+
+  }
+
+  // Free Fire
+  if (text === "🔫 Free Fire") {
+
+    bot.sendMessage(
+      msg.chat.id,
+      `🔫 FREE FIRE PRICE LIST
+
+100 Diamonds - 1,500 Ks
+310 Diamonds - 4,000 Ks
+520 Diamonds - 7,000 Ks`
+    );
+
+  }
+
+  // Admin
+  if (text === "👨‍💻 Contact Admin") {
+
+    bot.sendMessage(
+      msg.chat.id,
+      "👤 Admin Telegram: @bropoll"
     );
 
   }
