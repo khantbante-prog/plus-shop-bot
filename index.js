@@ -108,9 +108,14 @@ bot.on("callback_query", (query) => {
     const chatId = data.split("_")[1];
 
     bot.sendMessage(
-      chatId,
-      "✅ Payment Approved!\n\n🎮 Your order is successful."
-    );
+  chatId,
+ `✅ Payment Approved!
+
+🎮 Your order is being processed.
+⏳ Please wait for delivery.
+
+💎 Thanks for choosing PLUS SHOP`
+);
 
   }
 
