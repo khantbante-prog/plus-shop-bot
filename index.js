@@ -1,5 +1,13 @@
 const TelegramBot = require("node-telegram-bot-api");
 
+const fs = require("fs");
+
+let orders = [];
+
+if (fs.existsSync("orders.json")) {
+  orders = JSON.parse(fs.readFileSync("orders.json"));
+}
+
 const token = "8671336338:AAFTwnL5moLNwXoWSlMScyiVh5PtSqYSr5Y";
 
 // admin IDs
@@ -24,6 +32,18 @@ bot.onText(/\/start/, (msg) => {
 bot.on("photo", (msg) => {
 
   const user = msg.from;
+
+  orders.push({
+  user: user.first_name,
+  id: user.id,
+  file: msg.photo[0].file_id,
+  time: new Date()
+});
+
+fs.writeFileSync(
+  "orders.json",
+  JSON.stringify(orders, null, 2)
+);
 
   // random order id
   const orderId = Math.floor(
