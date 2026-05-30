@@ -31,8 +31,8 @@ bot.onText(/\/start/, (msg) => {
     {
       reply_markup: {
         keyboard: [
-          ["🎮PUBG UC", "💎 MLBB Diamonds"],
-          ["🎮Free Fire", "😎 Contact Admin"]
+          ["🔫 PUBG UC", "💎 MLBB Diamonds"],
+          ["🔫 Free Fire", "😎 Contact Admin"]
         ],
         resize_keyboard: true
       }
@@ -148,11 +148,11 @@ bot.on("message", (msg) => {
   const text = msg.text;
 
   // PUBG
-  if (text === "🎮 PUBG UC") {
+  if (text === "🔫 PUBG UC") {
 
     bot.sendMessage(
       msg.chat.id,
-      `🎮 PUBG UC PRICE LIST
+      `🔫 PUBG UC PRICE LIST
 
 60 UC  - 1,000 Ks
 325 UC - 5,000 Ks
@@ -176,11 +176,11 @@ bot.on("message", (msg) => {
   }
 
   // Free Fire
-  if (text === "🎮 Free Fire") {
+  if (text === "🔫 Free Fire") {
 
     bot.sendMessage(
       msg.chat.id,
-      `🎮 FREE FIRE PRICE LIST
+      `🔫 FREE FIRE PRICE LIST
 
 100 Diamonds - 1,500 Ks
 310 Diamonds - 4,000 Ks
@@ -190,7 +190,7 @@ bot.on("message", (msg) => {
   }
 
   // Admin
-  if (text === "👨‍💻 Contact Admin") {
+  if (text === "😎 Contact Admin") {
 
     bot.sendMessage(
       msg.chat.id,
