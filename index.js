@@ -18,6 +18,8 @@ const adminIds = [
 
 const bot = new TelegramBot(token, { polling: true });
 
+const userStates = {};
+
 console.log("Bot is running...");
 
 // start command
@@ -147,16 +149,38 @@ bot.on("message", (msg) => {
 
   const text = msg.text;
 
+  if (
+  userStates[msg.chat.id] &&
+  userStates[msg.chat.id].game === "PUBG" &&
+  !userStates[msg.chat.id].uid
+) {
+
+  userStates[msg.chat.id].uid = text;
+
+  bot.sendMessage(
+    msg.chat.id,
+    `✅ UID Saved: ${text}
+
+💎 Choose Package:
+
+60 UC
+325 UC
+660 UC`
+  );
+
+  return;
+}
+
   // PUBG
   if (text === "🔫 PUBG UC") {
 
+    userStates[msg.chat.id] = {
+      game: "PUBG"
+    };
+
     bot.sendMessage(
       msg.chat.id,
-      `🔫 PUBG UC PRICE LIST
-
-60 UC  - 1,000 Ks
-325 UC - 5,000 Ks
-660 UC - 10,000 Ks`
+      "🆔 Please send your PUBG UID"
     );
 
   }
