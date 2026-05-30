@@ -31,8 +31,8 @@ bot.onText(/\/start/, (msg) => {
     {
       reply_markup: {
         keyboard: [
-          ["🔫PUBG UC", "💎 MLBB Diamonds"],
-          ["🔫Free Fire", "😎 Contact Admin"]
+          ["🎮PUBG UC", "💎 MLBB Diamonds"],
+          ["🎮Free Fire", "😎 Contact Admin"]
         ],
         resize_keyboard: true
       }
