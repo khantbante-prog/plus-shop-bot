@@ -138,11 +138,10 @@ bot.on("callback_query", (query) => {
 
     bot.sendMessage(
       chatId,
-      "❌ Payment Rejected!\n\nPlease contact admin."
+      `❌ Payment Rejected!\n\nPlease contact admin.`
     );
 
   }
-
 });
 bot.on("message", (msg) => {
 
