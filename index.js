@@ -2,13 +2,24 @@ const TelegramBot = require("node-telegram-bot-api");
 
 const fs = require("fs");
 
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Bot is running");
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Web server started");
+});
+
 let orders = [];
 
 if (fs.existsSync("orders.json")) {
   orders = JSON.parse(fs.readFileSync("orders.json"));
 }
 
-const token = "8671336338:AAFTwnL5moLNwXoWSlMScyiVh5PtSqYSr5Y";
+const token = "8671336338:AAHU75g4bMkfp-GMC8QbO_WYGK1_8L8fTx0";
 
 // admin IDs
 const adminIds = [
