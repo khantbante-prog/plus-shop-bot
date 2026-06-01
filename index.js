@@ -98,12 +98,16 @@ fs.writeFileSync(
 
     // admin panel
     bot.sendMessage(
-      adminId,
-      `📥 New Order
+  adminId,
+  `📥 New PUBG Order
 
 🧾 Order ID: #${orderId}
+
 👤 User: ${user.first_name}
-🆔 User ID: ${user.id}`,
+🆔 User ID: ${user.id}
+
+🎯 UID: ${userStates[msg.chat.id]?.uid || "Not Provided"}
+💎 Package: ${userStates[msg.chat.id]?.package || "Not Selected"}`,
       {
         reply_markup: {
           inline_keyboard: [
@@ -169,14 +173,48 @@ bot.on("message", (msg) => {
   userStates[msg.chat.id].uid = text;
 
   bot.sendMessage(
+  msg.chat.id,
+  `💎 PUBG UC PRICE LIST
+
+60 UC  - 1,000 Ks
+325 UC - 5,000 Ks
+660 UC - 10,000 Ks
+
+👇 Choose Package`,
+  {
+    reply_markup: {
+      keyboard: [
+        ["60 UC"],
+        ["325 UC"],
+        ["660 UC"]
+      ],
+      resize_keyboard: true
+    }
+  }
+);
+
+  return;
+}
+
+if (
+  userStates[msg.chat.id] &&
+  userStates[msg.chat.id].game === "PUBG" &&
+  userStates[msg.chat.id].uid &&
+  !userStates[msg.chat.id].package &&
+  (
+    text === "60 UC" ||
+    text === "325 UC" ||
+    text === "660 UC"
+  )
+) {
+
+  userStates[msg.chat.id].package = text;
+
+  bot.sendMessage(
     msg.chat.id,
-    `✅ UID Saved: ${text}
+    `✅ Package Selected: ${text}
 
-💎 Choose Package:
-
-60 UC
-325 UC
-660 UC`
+📸 Now send your payment screenshot.`
   );
 
   return;
