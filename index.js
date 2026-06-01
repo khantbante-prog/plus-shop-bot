@@ -129,7 +129,7 @@ fs.writeFileSync(
   });
 
   delete userStates[msg.chat.id];
-  
+
 });
 bot.on("callback_query", (query) => {
 
@@ -166,6 +166,7 @@ bot.on("message", (msg) => {
 
   const text = msg.text;
 
+  // UID Save
   if (
   userStates[msg.chat.id] &&
   userStates[msg.chat.id].game === "PUBG" &&
@@ -236,16 +237,47 @@ if (
 
   }
 
-  // MLBB
-  if (text === "💎 MLBB Diamonds") {
+  if (
+  userStates[msg.chat.id] &&
+  userStates[msg.chat.id].game === "MLBB" &&
+  !userStates[msg.chat.id].mlbbId
+) {
 
-    bot.sendMessage(
-      msg.chat.id,
-      `💎 MLBB PRICE LIST
+  userStates[msg.chat.id].mlbbId = text;
+
+  bot.sendMessage(
+    msg.chat.id,
+    `💎 MLBB PRICE LIST
 
 86 Diamonds  - 2,000 Ks
 172 Diamonds - 4,000 Ks
-257 Diamonds - 6,000 Ks`
+257 Diamonds - 6,000 Ks
+
+👇 Choose Package`,
+    {
+      reply_markup: {
+        keyboard: [
+          ["86 Diamonds"],
+          ["172 Diamonds"],
+          ["257 Diamonds"]
+        ],
+        resize_keyboard: true
+      }
+    }
+  );
+
+  return;
+}
+  // MLBB
+  if (text === "💎 MLBB Diamonds") {
+   
+    userStates[msg.chat.id] = {
+      game: "MLBB"
+    };
+
+    bot.sendMessage(
+      msg.chat.id,
+      "🎮 please send your MLBB ID and Server ID\n\nExample:\n123456789(1234)"
     );
 
   }
