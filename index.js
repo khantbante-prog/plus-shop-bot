@@ -128,6 +128,8 @@ fs.writeFileSync(
 
   });
 
+  delete userStates[msg.chat.id];
+  
 });
 bot.on("callback_query", (query) => {
 
