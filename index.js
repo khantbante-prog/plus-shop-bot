@@ -268,6 +268,30 @@ if (
 
   return;
 }
+
+if (
+  userStates[msg.chat.id] &&
+  userStates[msg.chat.id].game === "MLBB" &&
+  userStates[msg.chat.id].mlbbId &&
+  !userStates[msg.chat.id].package &&
+  (
+    text === "86 Diamonds" ||
+    text === "172 Diamonds" ||
+    text === "257 Diamonds"
+  )
+) {
+
+  userStates[msg.chat.id].package = text;
+
+  bot.sendMessage(
+    msg.chat.id,
+    `✅ Package Selected: ${text}
+
+📸 Now send your payment screenshot.`
+  );
+
+  return;
+}
   // MLBB
   if (text === "💎 MLBB Diamonds") {
    
