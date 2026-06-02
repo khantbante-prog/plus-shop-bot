@@ -117,7 +117,7 @@ fs.writeFileSync(
     // admin panel
     bot.sendMessage(
   adminId,
-  `📥 New PUBG Order
+  `📥 New Order
 
 🧾 Order ID: #${orderId}
 
