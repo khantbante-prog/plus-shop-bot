@@ -147,6 +147,20 @@ ${orderInfo}`,
 
   delete userStates[msg.chat.id];
 
+  bot.sendMessage(
+  msg.chat.id,
+  "🏠 Back to Main Menu",
+  {
+    reply_markup: {
+      keyboard: [
+        ["🔫 PUBG UC", "💎 MLBB Diamonds"],
+        ["🔫 Free Fire", "😎 Contact Admin"]
+      ],
+      resize_keyboard: true
+    }
+  }
+);
+
 });
 bot.on("callback_query", (query) => {
 
