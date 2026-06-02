@@ -59,6 +59,24 @@ bot.on("photo", (msg) => {
 
   const user = msg.from;
 
+  const state = userStates[msg.chat.id];
+
+  let orderInfo = "";
+
+  if (state?.game === "PUBG") {
+  orderInfo =
+`🎮 Game: PUBG
+🎯 UID: ${state.uid}
+💎 Package: ${state.package}`;
+}
+
+if (state?.game === "MLBB") {
+  orderInfo =
+`🎮 Game: MLBB
+🆔 ID/Server: ${state.mlbbId}
+💎 Package: ${state.package}`;
+}
+
   orders.push({
   user: user.first_name,
   id: user.id,
@@ -106,8 +124,7 @@ fs.writeFileSync(
 👤 User: ${user.first_name}
 🆔 User ID: ${user.id}
 
-🎯 UID: ${userStates[msg.chat.id]?.uid || "Not Provided"}
-💎 Package: ${userStates[msg.chat.id]?.package || "Not Selected"}`,
+${orderInfo}`,
       {
         reply_markup: {
           inline_keyboard: [
