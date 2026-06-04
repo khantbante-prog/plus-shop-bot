@@ -255,8 +255,18 @@ if (
     msg.chat.id,
     `✅ Package Selected: ${text}
 
-📸 Now send your payment screenshot.`
-  );
+  💳 Payment Methods
+
+🔈 KBZPay
+09459066038
+Bhone Myint Kyaw
+
+🔈 WavePay
+09671029588
+Bhone Myint Kyaw
+
+📸 After payment, send your screenshot.`
+);  
 
   return;
 }
@@ -325,8 +335,18 @@ if (
     msg.chat.id,
     `✅ Package Selected: ${text}
 
-📸 Now send your payment screenshot.`
-  );
+  💳 Payment Methods
+
+🔈 KBZPay
+09459066038
+Bhone Myint Kyaw
+
+🔈 WavePay
+09671029588
+Bhone Myint Kyaw
+
+📸 After payment, send your screenshot.`
+);
 
   return;
 }
@@ -394,8 +414,18 @@ if (
     msg.chat.id,
     `✅ Package Selected: ${text}
 
-📸 Now send your payment screenshot.`
-  );
+  💳 Payment Methods
+
+🔈 KBZPay
+09459066038
+Bhone Myint Kyaw
+
+🔈 WavePay
+09671029588
+Bhone Myint Kyaw
+
+📸 After payment, send your screenshot.`
+);
 
   return;
 }
