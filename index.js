@@ -77,6 +77,13 @@ if (state?.game === "MLBB") {
 💎 Package: ${state.package}`;
 }
 
+if (state?.game === "FREE FIRE") {
+  orderInfo =
+`🎮 Game: Free Fire
+🆔 UID: ${state.uid}
+💎 Package: ${state.package}`;
+}
+
   orders.push({
   user: user.first_name,
   id: user.id,
@@ -337,19 +344,75 @@ if (
 
   }
 
-  // Free Fire
-  if (text === "🔫 Free Fire") {
+  if (
+  userStates[msg.chat.id] &&
+  userStates[msg.chat.id].game === "FREE FIRE" &&
+  !userStates[msg.chat.id].uid
+) {
 
-    bot.sendMessage(
-      msg.chat.id,
-      `🔫 FREE FIRE PRICE LIST
+  userStates[msg.chat.id].uid = text;
+
+  bot.sendMessage(
+    msg.chat.id,
+    `💥 FREE FIRE PRICE LIST
 
 100 Diamonds - 1,500 Ks
 310 Diamonds - 4,000 Ks
-520 Diamonds - 7,000 Ks`
-    );
+520 Diamonds - 7,000 Ks
 
-  }
+👇 Choose Package`,
+    {
+      reply_markup: {
+        keyboard: [
+          ["100 Diamonds"],
+          ["310 Diamonds"],
+          ["520 Diamonds"]
+        ],
+        resize_keyboard: true
+      }
+    }
+  );
+
+  return;
+}
+
+if (
+  userStates[msg.chat.id] &&
+  userStates[msg.chat.id].game === "FREE FIRE" &&
+  userStates[msg.chat.id].uid &&
+  !userStates[msg.chat.id].package &&
+  (
+    text === "100 Diamonds" ||
+    text === "310 Diamonds" ||
+    text === "520 Diamonds"
+  )
+) {
+
+  userStates[msg.chat.id].package = text;
+
+  bot.sendMessage(
+    msg.chat.id,
+    `✅ Package Selected: ${text}
+
+📸 Now send your payment screenshot.`
+  );
+
+  return;
+}
+
+  // Free Fire
+  if (text === "🔫 Free Fire") {
+
+  userStates[msg.chat.id] = {
+    game: "FREE FIRE"
+  };
+
+  bot.sendMessage(
+    msg.chat.id,
+    "🆔 Please send your Free Fire UID"
+  );
+
+}
 
   // Admin
   if (text === "😎 Contact Admin") {
