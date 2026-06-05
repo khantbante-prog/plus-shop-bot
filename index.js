@@ -455,3 +455,27 @@ Bhone Myint Kyaw
   }
 
 });
+
+bot.onText(/\/stats/, (msg) => {
+
+  if (!adminIds.includes(String(msg.from.id))) {
+    return;
+  }
+
+  const totalOrders = orders.length;
+
+  const today = new Date().toDateString();
+
+  const todayOrders = orders.filter(order =>
+    new Date(order.time).toDateString() === today
+  ).length;
+
+  bot.sendMessage(
+    msg.chat.id,
+    `📊 PLUS SHOP Statistics
+
+📦 Total Orders: ${totalOrders}
+📅 Today Orders: ${todayOrders}`
+  );
+
+});
