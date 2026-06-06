@@ -46,6 +46,8 @@ bot.onText(/\/start/, (msg) => {
   user => user.id === msg.from.id
 );
 
+console.log(users);
+
 if (!userExists) {
 
   users.push({
