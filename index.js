@@ -19,6 +19,12 @@ if (fs.existsSync("orders.json")) {
   orders = JSON.parse(fs.readFileSync("orders.json"));
 }
 
+let users = [];
+
+if (fs.existsSync("users.json")) {
+  users = JSON.parse(fs.readFileSync("users.json"));
+}
+
 const token = "8671336338:AAHU75g4bMkfp-GMC8QbO_WYGK1_8L8fTx0";
 
 // admin IDs
@@ -35,6 +41,24 @@ console.log("Bot is running...");
 
 // start command
 bot.onText(/\/start/, (msg) => {
+
+  const userExists = users.find(
+  user => user.id === msg.from.id
+);
+
+if (!userExists) {
+
+  users.push({
+    id: msg.from.id,
+    name: msg.from.first_name
+  });
+
+  fs.writeFileSync(
+    "users.json",
+    JSON.stringify(users, null, 2)
+  );
+
+}
 
   bot.sendMessage(
     msg.chat.id,
@@ -490,15 +514,15 @@ bot.onText(/\/broadcast (.+)/, async (msg, match) => {
 
   const sentUsers = new Set();
 
-  for (const order of orders) {
+  for (const user of users) {
 
-    if (sentUsers.has(order.id)) continue;
+    if (sentUsers.has(user.id)) continue;
 
     try {
-      await bot.sendMessage(order.id, message);
-      sentUsers.add(order.id);
+      await bot.sendMessage(user.id, message);
+      sentUsers.add(user.id);
     } catch (err) {
-      console.log(`Failed to send to ${order.id}`);
+      console.log(`Failed to send to ${user.id}`);
     }
 
   }
@@ -506,6 +530,19 @@ bot.onText(/\/broadcast (.+)/, async (msg, match) => {
   bot.sendMessage(
     msg.chat.id,
     `📢 Broadcast sent to ${sentUsers.size} users`
+  );
+
+});
+
+bot.onText(/\/users/, (msg) => {
+
+  if (!adminIds.includes(String(msg.from.id))) {
+    return;
+  }
+
+  bot.sendMessage(
+    msg.chat.id,
+    `👥 Total Users: ${users.length}`
   );
 
 });
