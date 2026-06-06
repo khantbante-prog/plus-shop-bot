@@ -479,3 +479,33 @@ bot.onText(/\/stats/, (msg) => {
   );
 
 });
+
+bot.onText(/\/broadcast (.+)/, async (msg, match) => {
+
+  if (!adminIds.includes(String(msg.from.id))) {
+    return;
+  }
+
+  const message = match[1];
+
+  const sentUsers = new Set();
+
+  for (const order of orders) {
+
+    if (sentUsers.has(order.id)) continue;
+
+    try {
+      await bot.sendMessage(order.id, message);
+      sentUsers.add(order.id);
+    } catch (err) {
+      console.log(`Failed to send to ${order.id}`);
+    }
+
+  }
+
+  bot.sendMessage(
+    msg.chat.id,
+    `📢 Broadcast sent to ${sentUsers.size} users`
+  );
+
+});
